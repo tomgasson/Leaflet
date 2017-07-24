@@ -5,7 +5,7 @@
  */
 
 export var freeze = Object.freeze;
-Object.freeze = null;
+Object.freeze = function (obj) { return obj; };
 
 // @function extend(dest: Object, src?: Object): Object
 // Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter. Has an `L.extend` shortcut.
