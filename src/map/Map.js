@@ -1325,7 +1325,7 @@ export var Map = Evented.extend({
 
 	_fireDOMEvent: function (e, type, targets) {
 
-		if (e.type === 'click') {
+		if (false && e.type === 'click') {
 			// Fire a synthetic 'preclick' event which propagates up (mainly for closing popups).
 			// @event preclick: MouseEvent
 			// Fired before mouse click on the map (sometimes useful when you
@@ -1352,7 +1352,7 @@ export var Map = Evented.extend({
 			originalEvent: e
 		};
 
-		if (e.type !== 'keypress') {
+		if (false && e.type !== 'keypress') {
 			var isMarker = (target.options && 'icon' in target.options);
 			data.containerPoint = isMarker ?
 					this.latLngToContainerPoint(target.getLatLng()) : this.mouseEventToContainerPoint(e);
