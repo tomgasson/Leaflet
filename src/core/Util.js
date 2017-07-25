@@ -14,6 +14,12 @@ export function extend(dest) {
 		for (i in src) {
 			dest[i] = src[i];
 		}
+		if (src && typeof src === "object"){
+			var descriptors = Object.getOwnPropertyDescriptors(src);
+			for (i in descriptors) {
+				Object.defineProperty(dest, i, descriptors[i]);
+			}
+		}
 	}
 	return dest;
 }

@@ -1352,12 +1352,27 @@ export var Map = Evented.extend({
 			originalEvent: e
 		};
 
-		if (false && e.type !== 'keypress') {
+		if (e.type !== 'keypress') {
 			var isMarker = (target.options && 'icon' in target.options);
-			data.containerPoint = isMarker ?
-					this.latLngToContainerPoint(target.getLatLng()) : this.mouseEventToContainerPoint(e);
-			data.layerPoint = this.containerPointToLayerPoint(data.containerPoint);
-			data.latlng = isMarker ? target.getLatLng() : this.layerPointToLatLng(data.layerPoint);
+			var that = this
+			Object.defineProperties(data, {
+				containerPoint:{
+					get: function(){
+						return isMarker ? that.latLngToContainerPoint(target.getLatLng()) : that.mouseEventToContainerPoint(e);
+					}
+				},
+				layerPoint: {
+					get: function(){
+						return that.containerPointToLayerPoint(data.containerPoint);
+					}
+				},
+				latlng: {
+					get: function(){
+						return isMarker ? target.getLatLng() : that.layerPointToLatLng(data.layerPoint);
+					}
+				}
+			})
+			console.log("D", 'data', data, data.latlng)
 		}
 
 		for (var i = 0; i < targets.length; i++) {

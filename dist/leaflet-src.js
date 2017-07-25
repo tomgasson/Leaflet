@@ -1,5 +1,5 @@
 /*
- * Leaflet 1.1.0+high_performance.90201ce, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.1.0+high_performance.7fc8ffd, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2017 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 (function (global, factory) {
@@ -8,7 +8,7 @@
 	(factory((global.L = global.L || {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.1.0+high_performance.90201ce7";
+var version = "1.1.0+high_performance.7fc8ffde";
 
 /*
  * @namespace Util
@@ -25,6 +25,12 @@ function extend(dest) {
 		src = arguments[j];
 		for (i in src) {
 			dest[i] = src[i];
+		}
+		if (src && typeof src === "object"){
+			var descriptors = Object.getOwnPropertyDescriptors(src);
+			for (i in descriptors) {
+				Object.defineProperty(dest, i, descriptors[i]);
+			}
 		}
 	}
 	return dest;
@@ -4256,12 +4262,27 @@ var Map = Evented.extend({
 			originalEvent: e
 		};
 
-		if (false && e.type !== 'keypress') {
+		if (e.type !== 'keypress') {
 			var isMarker = (target.options && 'icon' in target.options);
-			data.containerPoint = isMarker ?
-					this.latLngToContainerPoint(target.getLatLng()) : this.mouseEventToContainerPoint(e);
-			data.layerPoint = this.containerPointToLayerPoint(data.containerPoint);
-			data.latlng = isMarker ? target.getLatLng() : this.layerPointToLatLng(data.layerPoint);
+			var that = this;
+			Object.defineProperties(data, {
+				containerPoint:{
+					get: function(){
+						return isMarker ? that.latLngToContainerPoint(target.getLatLng()) : that.mouseEventToContainerPoint(e);
+					}
+				},
+				layerPoint: {
+					get: function(){
+						return that.containerPointToLayerPoint(data.containerPoint);
+					}
+				},
+				latlng: {
+					get: function(){
+						return isMarker ? target.getLatLng() : that.layerPointToLatLng(data.layerPoint);
+					}
+				}
+			});
+			console.log("D", 'data', data, data.latlng);
 		}
 
 		for (var i = 0; i < targets.length; i++) {
