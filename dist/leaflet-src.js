@@ -1,5 +1,5 @@
 /*
- * Leaflet 1.1.0+high_performance.eb95728, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.1.0+high_performance.90201ce, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2017 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 (function (global, factory) {
@@ -8,7 +8,7 @@
 	(factory((global.L = global.L || {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.1.0+high_performance.eb957280";
+var version = "1.1.0+high_performance.90201ce7";
 
 /*
  * @namespace Util
@@ -5734,7 +5734,7 @@ var Draggable = Evented.extend({
 			this._moved = true;
 			this._startPos = getPosition(this._element).subtract(offset);
 
-			addClass(document.body, 'leaflet-dragging');
+			// DomUtil.addClass(document.body, 'leaflet-dragging');
 
 			this._lastTarget = e.target || e.srcElement;
 			// IE and Edge do not give the <use> element, so fetch it
@@ -5742,7 +5742,7 @@ var Draggable = Evented.extend({
 			if ((window.SVGElementInstance) && (this._lastTarget instanceof SVGElementInstance)) {
 				this._lastTarget = this._lastTarget.correspondingUseElement;
 			}
-			addClass(this._lastTarget, 'leaflet-drag-target');
+			// DomUtil.addClass(this._lastTarget, 'leaflet-drag-target');
 		}
 
 		this._newPos = this._startPos.add(offset);
@@ -5778,10 +5778,10 @@ var Draggable = Evented.extend({
 	},
 
 	finishDrag: function () {
-		removeClass(document.body, 'leaflet-dragging');
+		// DomUtil.removeClass(document.body, 'leaflet-dragging');
 
 		if (this._lastTarget) {
-			removeClass(this._lastTarget, 'leaflet-drag-target');
+			// DomUtil.removeClass(this._lastTarget, 'leaflet-drag-target');
 			this._lastTarget = null;
 		}
 
