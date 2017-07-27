@@ -1372,7 +1372,6 @@ export var Map = Evented.extend({
 					}
 				}
 			})
-			console.log("D", 'data', data, data.latlng)
 		}
 
 		for (var i = 0; i < targets.length; i++) {

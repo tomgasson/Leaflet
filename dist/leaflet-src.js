@@ -1,5 +1,5 @@
 /*
- * Leaflet 1.1.0+high_performance.7fc8ffd, a JS library for interactive maps. http://leafletjs.com
+ * Leaflet 1.1.0+high_performance.715c384, a JS library for interactive maps. http://leafletjs.com
  * (c) 2010-2017 Vladimir Agafonkin, (c) 2010-2011 CloudMade
  */
 (function (global, factory) {
@@ -8,7 +8,7 @@
 	(factory((global.L = global.L || {})));
 }(this, (function (exports) { 'use strict';
 
-var version = "1.1.0+high_performance.7fc8ffde";
+var version = "1.1.0+high_performance.715c3849";
 
 /*
  * @namespace Util
@@ -4282,7 +4282,6 @@ var Map = Evented.extend({
 					}
 				}
 			});
-			console.log("D", 'data', data, data.latlng);
 		}
 
 		for (var i = 0; i < targets.length; i++) {
